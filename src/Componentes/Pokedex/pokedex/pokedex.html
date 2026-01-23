@@ -1,0 +1,173 @@
+<div class="board">
+  <header class="header">
+    <h2>🧪 AJAX Demo: Mini Pokédex</h2>
+  </header>
+
+  <div class="layout">
+    <section class="panel panel--list">
+      <div class="panel__top">
+        <h3>📒 Lista</h3>
+
+        <span class="chip">
+          @if (loadedAll) {
+            {{ filteredAll.length }} / {{ allItems.length }}
+          } @else {
+            {{ items.length }} / {{ total === 0 ? '...' : total }}
+          }
+        </span>
+      </div>
+
+      @if (errorList) {
+        <p class="error">⚠️ {{ errorList }}</p>
+      }
+
+      <div class="toolbar">
+        <button
+          type="button"
+          class="btn"
+          (click)="cargarMas()"
+          [disabled]="loadingList || loadingAll || loadedAll || !hayMas"
+        >
+          @if (loadingList) { Cargando... } @else { Cargar más }
+        </button>
+
+        <button
+          type="button"
+          class="btn btn--dark"
+          (click)="cargarTodos()"
+          [disabled]="loadingAll || loadedAll"
+        >
+          @if (loadingAll) { Cargando todos... } @else { Cargar todos }
+        </button>
+      </div>
+
+      @if (loadedAll) {
+        <div class="filters">
+          <label class="f">
+            <span>Buscar por nombre</span>
+            <input
+              type="text"
+              placeholder="Ej: pika"
+              [value]="searchNombre"
+              (input)="searchNombre = $any($event.target).value; onSearchChange()"
+            />
+          </label>
+
+          <label class="f">
+            <span># Pokédex</span>
+            <input
+              type="text"
+              inputmode="numeric"
+              placeholder="Ej: 25"
+              [value]="searchNumero"
+              (input)="searchNumero = $any($event.target).value; onSearchChange()"
+            />
+          </label>
+
+          <label class="f small">
+            <span>Por página</span>
+            <select
+              [value]="pageSize"
+              (change)="pageSize = +$any($event.target).value; onSearchChange()"
+            >
+              <option [value]="10">10</option>
+              <option [value]="20">20</option>
+              <option [value]="50">50</option>
+            </select>
+          </label>
+
+          <div class="pager">
+            <button type="button" class="btn btn--ghost" (click)="prevPage()" [disabled]="page <= 1">
+              ◀
+            </button>
+
+            <span class="page">
+              {{ page }} / {{ totalPages }}
+            </span>
+
+            <button type="button" class="btn btn--ghost" (click)="nextPage()" [disabled]="page >= totalPages">
+              ▶
+            </button>
+          </div>
+        </div>
+      }
+
+      <!-- Loading overlay solo para "cargar todos" -->
+      @if (loadingAll) {
+        <div class="overlay">
+          <div class="spinner">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+          <p>Cargando todos los Pokémon…</p>
+        </div>
+      }
+
+      <div class="list">
+        @for (p of pageItems; track p.id) {
+          <button type="button" class="row" (click)="seleccionar(p)">
+            <img [src]="p.sprite" [alt]="p.name" />
+            <div class="row__text">
+              <span class="name">{{ p.name }}</span>
+              <span class="id">#{{ p.id }}</span>
+            </div>
+          </button>
+        }
+      </div>
+
+      @if (loadedAll && pageItems.length === 0) {
+        <p class="hint">No hay resultados con esos filtros.</p>
+      }
+    </section>
+
+    <section class="panel panel--detail">
+      <div class="panel__top">
+        <h3>🔎 Detalle</h3>
+      </div>
+
+      @if (loadingDetail) {
+        <div class="skeleton">
+          <div class="sk-img"></div>
+          <div class="sk-line"></div>
+          <div class="sk-line"></div>
+          <div class="sk-line"></div>
+        </div>
+      } @else if (errorDetail) {
+        <p class="error">⚠️ {{ errorDetail }}</p>
+      } @else if (selected) {
+        <div class="card">
+          <div class="card__head">
+            <div>
+              <h4 class="title">{{ selected.name }}</h4>
+              <p class="muted">#{{ selected.id }}</p>
+            </div>
+            <img class="art" [src]="selected.sprite" [alt]="selected.name" />
+          </div>
+
+          <div class="info">
+            <div class="box">
+              <span class="label">Altura</span>
+              <span class="value">{{ selected.height }}</span>
+            </div>
+            <div class="box">
+              <span class="label">Peso</span>
+              <span class="value">{{ selected.weight }}</span>
+            </div>
+          </div>
+
+          <div class="types">
+            <span class="label">Tipos</span>
+            <div class="badges">
+              @for (t of selected.types; track t) {
+                <span class="badge">{{ t }}</span>
+              }
+            </div>
+          </div>
+        </div>
+      } @else {
+        <p class="hint">Selecciona un Pokémon de la lista para ver su detalle.</p>
+      }
+    </section>
+  </div>
+</div>

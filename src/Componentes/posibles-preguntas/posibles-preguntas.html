@@ -1,0 +1,26 @@
+<div class="faq">
+  <div class="faq__header">
+    <h2>📌 Posibles preguntas</h2>
+  </div>
+
+  @for (b of bloques; track b.titulo) {
+    <section class="bloque">
+      <div class="bloque__title">
+        <h3>{{ b.titulo }}</h3>
+        <span class="count">{{ b.items.length }} preguntas</span>
+      </div>
+
+      <ul class="lista">
+        @for (qa of b.items; track qa.pregunta; let i = $index) {
+          <li class="item">
+            <div class="qline">
+              <span class="badge">{{ i + 1 }}</span>
+              <p class="pregunta">{{ qa.pregunta }}</p>
+            </div>
+            <p class="respuesta">{{ qa.respuesta }}</p>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+</div>

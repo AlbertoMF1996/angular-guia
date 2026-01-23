@@ -1,0 +1,132 @@
+.binding {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 16px;
+  border-radius: 18px;
+  border: 2px dashed #c7d2fe;
+  background: #ffffff;
+  box-shadow: 0 10px 25px rgba(16, 24, 40, 0.06);
+}
+
+.binding__header {
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: #f4f7ff;
+  border: 1px solid #e5e7eb;
+
+  h2 {
+    margin: 0 0 4px;
+    font-size: 20px;
+  }
+
+  .binding__sub {
+    margin: 0;
+    color: #4b5563;
+    font-weight: 700;
+    font-size: 13px;
+  }
+}
+
+.binding__form {
+  margin-top: 12px;
+  display: grid;
+  gap: 12px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 1000;
+  color: #374151;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+
+.input {
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 2px solid #e5e7eb;
+  background: #fff;
+  font-weight: 800;
+  outline: none;
+
+  &:focus {
+    border-color: #2f6feb;
+    box-shadow: 0 0 0 3px rgba(47, 111, 235, 0.18);
+  }
+}
+
+.hello {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.hello__chip {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+
+  background: #dcfce7;
+  border: 2px solid #bbf7d0;
+}
+
+.hello__text {
+  margin: 0;
+  color: #111827;
+  font-weight: 800;
+
+  strong {
+    font-weight: 1000;
+  }
+}
+
+.btn {
+  border: 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-weight: 1000;
+  cursor: pointer;
+  transition: transform 80ms ease, opacity 120ms ease, box-shadow 120ms ease;
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:hover {
+    opacity: 0.96;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    box-shadow: none;
+  }
+
+  &--primary {
+    background: #2f6feb;
+    color: #ffffff;
+    box-shadow: 0 10px 20px rgba(47, 111, 235, 0.25);
+  }
+}
+
+.hint {
+  margin: 0;
+  color: #6b7280;
+  font-weight: 800;
+
+  strong {
+    color: #111827;
+  }
+}

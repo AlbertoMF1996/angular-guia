@@ -1,0 +1,136 @@
+.todo {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+  border-radius: 18px;
+  border: 2px dashed #c7d2fe;
+  background: #ffffff;
+  box-shadow: 0 10px 25px rgba(16, 24, 40, 0.06);
+}
+
+.todo__header {
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: #f4f7ff;
+  border: 1px solid #e5e7eb;
+
+  h2 {
+    margin: 0 0 4px;
+    font-size: 20px;
+  }
+
+  .todo__sub {
+    margin: 0;
+    color: #4b5563;
+    font-weight: 700;
+    font-size: 13px;
+  }
+}
+
+.todo__form {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+
+  @media (max-width: 520px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.todo__input {
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 2px solid #e5e7eb;
+  background: #fff;
+  font-weight: 700;
+  outline: none;
+
+  &:focus {
+    border-color: #2f6feb;
+    box-shadow: 0 0 0 3px rgba(47, 111, 235, 0.18);
+  }
+}
+
+.todo__list {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.todo__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 12px 12px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+
+  transition: transform 80ms ease, box-shadow 120ms ease, background 120ms ease;
+
+  &:hover {
+    background: #f3f4f6;
+    box-shadow: 0 12px 28px rgba(16, 24, 40, 0.08);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.todo__text {
+  font-weight: 900;
+  color: #111827;
+  line-height: 1.25;
+  word-break: break-word;
+}
+
+/* Empty state */
+.empty {
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 16px;
+  border: 2px dashed #f3c06b;
+  background: #fff7ed;
+  color: #6b7280;
+
+  p {
+    margin: 6px 0;
+    font-weight: 700;
+  }
+}
+
+/* Botones reutilizables */
+.btn {
+  border: 0;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 80ms ease, opacity 120ms ease, box-shadow 120ms ease;
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:hover {
+    opacity: 0.96;
+  }
+
+  &--primary {
+    background: #2f6feb;
+    color: #ffffff;
+    box-shadow: 0 10px 20px rgba(47, 111, 235, 0.25);
+  }
+
+  &--danger {
+    background: #ef4444;
+    color: #ffffff;
+    box-shadow: 0 10px 20px rgba(239, 68, 68, 0.22);
+  }
+}

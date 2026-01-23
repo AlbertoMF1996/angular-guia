@@ -1,0 +1,215 @@
+<div class="board">
+  <header class="header">
+    <h2>📚 Mini app: Tareas (localStorage)</h2>
+  </header>
+
+  <!-- Crear -->
+  <section class="card card--create">
+    <h3 class="card__title">➕ Nueva tarea</h3>
+
+    <div class="form">
+      <label class="field">
+        <span class="field__label">Título de la tarea</span>
+        <input
+          type="text"
+          placeholder="Ej: Terminar ejercicios de Angular"
+          [value]="titulo"
+          (input)="titulo = $any($event.target).value"
+        />
+      </label>
+
+      <label class="field">
+        <span class="field__label">Fecha máxima</span>
+        <input
+          type="date"
+          [value]="fechaMaxima"
+          (input)="fechaMaxima = $any($event.target).value"
+        />
+      </label>
+
+      <label class="field">
+        <span class="field__label">Prioridad</span>
+        <select
+          [value]="prioridad"
+          (change)="prioridad = $any($event.target).value"
+        >
+          <option value="Baja">Baja</option>
+          <option value="Media">Media</option>
+          <option value="Alta">Alta</option>
+        </select>
+      </label>
+    </div>
+
+    @if (error) {
+      <p class="error">⚠️ {{ error }}</p>
+    }
+
+    <div class="actions">
+      <button type="button" class="btn btn--primary" (click)="guardar()">
+        Guardar
+      </button>
+    </div>
+  </section>
+
+  <!-- Mostrar + filtros -->
+  <section class="list">
+    <div class="list__header">
+      <div>
+        <h3>🗂️ Tareas</h3>
+        <p class="mini-info">
+          Pendientes: <strong>{{ pendientesFiltradas.length }}</strong>
+          · Completadas: <strong>{{ completadasFiltradas.length }}</strong>
+        </p>
+      </div>
+    </div>
+
+    <div class="filters">
+      <label class="filter">
+        <span>Prioridad</span>
+        <select
+          [value]="filtroPrioridad"
+          (change)="filtroPrioridad = $any($event.target).value"
+        >
+          <option value="Todas">Todas</option>
+          <option value="Baja">Baja</option>
+          <option value="Media">Media</option>
+          <option value="Alta">Alta</option>
+        </select>
+      </label>
+
+      <label class="filter">
+        <span>Desde</span>
+        <input
+          type="date"
+          [value]="fechaDesde"
+          (input)="fechaDesde = $any($event.target).value"
+        />
+      </label>
+
+      <label class="filter">
+        <span>Hasta</span>
+        <input
+          type="date"
+          [value]="fechaHasta"
+          (input)="fechaHasta = $any($event.target).value"
+        />
+      </label>
+
+      <button type="button" class="btn btn--ghost" (click)="limpiarFiltros()">
+        Limpiar filtros
+      </button>
+    </div>
+
+    <!-- Pendientes -->
+    <h4 class="section-title">📝 Pendientes</h4>
+
+    @if (pendientesFiltradas.length === 0) {
+      <div class="empty">
+        <p><strong>No hay tareas pendientes con esos filtros.</strong></p>
+        <p>Prueba a limpiar filtros o añade una tarea nueva.</p>
+      </div>
+    } @else {
+      <div class="grid">
+        @for (t of pendientesFiltradas; track t.idTarea) {
+          <article class="card card--task">
+            <div class="card__top">
+              <span class="id">ID: {{ t.idTarea }}</span>
+              <span class="badge" [class]="badgeClass(t.prioridad)">
+                {{ t.prioridad }}
+              </span>
+            </div>
+
+            <div class="form form--readonly">
+              <label class="field">
+                <span class="field__label">Título</span>
+                <input type="text" [value]="t.titulo" readonly />
+              </label>
+
+              <label class="field">
+                <span class="field__label">Fecha máxima</span>
+                <input type="date" [value]="t.fechaMaxima" readonly />
+              </label>
+
+              <label class="field">
+                <span class="field__label">Prioridad</span>
+                <input type="text" [value]="t.prioridad" readonly />
+              </label>
+            </div>
+
+            <div class="actions actions--between">
+              <span class="mini">🕒 {{ t.fechaMaxima }}</span>
+
+              <div class="action-pack">
+                <button type="button" class="btn btn--ok" (click)="completar(t.idTarea)">
+                  Completada
+                </button>
+                <button type="button" class="btn btn--danger" (click)="eliminar(t.idTarea)">
+                  Eliminar
+                </button>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    }
+
+    <!-- Completadas (menú plegable debajo) -->
+    <div class="fold">
+      <button
+        type="button"
+        class="fold__btn"
+        (click)="mostrarCompletadas = !mostrarCompletadas"
+      >
+        @if (mostrarCompletadas) { ▼ } @else { ▶ }
+        Completadas ({{ completadasFiltradas.length }})
+      </button>
+
+      @if (mostrarCompletadas) {
+        @if (completadasFiltradas.length === 0) {
+          <div class="empty empty--soft">
+            <p><strong>No hay tareas completadas con esos filtros.</strong></p>
+          </div>
+        } @else {
+          <div class="grid">
+            @for (t of completadasFiltradas; track t.idTarea) {
+              <article class="card card--task card--done">
+                <div class="card__top">
+                  <span class="id">ID: {{ t.idTarea }}</span>
+
+                  <!-- Etiqueta: check verde -->
+                  <span class="badge done">
+                    ✅
+                  </span>
+                </div>
+
+                <div class="form form--readonly">
+                  <label class="field">
+                    <span class="field__label">Título</span>
+                    <input type="text" [value]="t.titulo" readonly />
+                  </label>
+
+                  <label class="field">
+                    <span class="field__label">Fecha máxima</span>
+                    <input type="date" [value]="t.fechaMaxima" readonly />
+                  </label>
+
+                  <label class="field">
+                    <span class="field__label">Prioridad</span>
+                    <input type="text" [value]="t.prioridad" readonly />
+                  </label>
+                </div>
+
+                <div class="actions actions--between">
+                  <span class="mini">✅ Completada</span>
+                  <button type="button" class="btn btn--danger" (click)="eliminar(t.idTarea)">
+                    Eliminar
+                  </button>
+                </div>
+              </article>
+            }
+          </div>
+        }
+      }
+    </div>
+  </section>
+</div>

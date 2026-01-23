@@ -1,0 +1,139 @@
+/* Contenedor general */
+.faq {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 18px;
+}
+
+/* Cabecera del componente */
+.faq__header {
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 2px dashed #b7c7ff;
+  background: #f4f7ff;
+  box-shadow: 0 10px 25px rgba(16, 24, 40, 0.06);
+
+  h2 {
+    margin: 0 0 6px;
+    font-size: 22px;
+  }
+
+  p {
+    margin: 0;
+    color: #4b5563;
+    font-weight: 700;
+  }
+}
+
+/* Bloque (por tema) */
+.bloque {
+  margin-top: 14px;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  box-shadow: 0 10px 25px rgba(16, 24, 40, 0.06);
+  overflow: hidden;
+}
+
+/* Título del bloque */
+.bloque__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  padding: 12px 14px;
+  background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+  border-bottom: 1px solid #eef2f7;
+
+  h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 1000;
+  }
+
+  .count {
+    font-size: 12px;
+    font-weight: 900;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    color: #111827;
+  }
+}
+
+/* Lista */
+.lista {
+  list-style: none;
+  margin: 0;
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+/* Item */
+.item {
+  display: grid;
+  gap: 6px;
+
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  transition: transform 80ms ease, box-shadow 120ms ease, background 120ms ease;
+
+  &:hover {
+    background: #f3f4f6;
+    box-shadow: 0 12px 28px rgba(16, 24, 40, 0.08);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+/* Línea de pregunta con numerito */
+.qline {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.badge {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+
+  display: grid;
+  place-items: center;
+
+  font-weight: 1000;
+  font-size: 12px;
+  color: #ffffff;
+  background: #2f6feb;
+  box-shadow: 0 10px 20px rgba(47, 111, 235, 0.25);
+}
+
+.pregunta {
+  margin: 0;
+  font-weight: 1000;
+  color: #111827;
+  line-height: 1.25;
+}
+
+/* Respuesta */
+.respuesta {
+  margin: 0;
+  color: #374151;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* Separador sutil entre bloques (si quieres) */
+.sep {
+  height: 1px;
+  background: #eef2f7;
+  margin: 10px 0 0;
+}

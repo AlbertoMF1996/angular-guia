@@ -1,0 +1,17 @@
+@if (abierto) {
+  <div class="backdrop" (click)="onBackdropClick()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <h3 class="title">{{ titulo }}</h3>
+      <p class="message">{{ mensaje }}</p>
+
+      <div class="actions">
+        <button type="button" class="btn btn--ghost" (click)="onCancel()">
+          {{ textoCancelar }}
+        </button>
+        <button type="button" class="btn btn--danger" (click)="onConfirm()">
+          {{ textoConfirmar }}
+        </button>
+      </div>
+    </div>
+  </div>
+}

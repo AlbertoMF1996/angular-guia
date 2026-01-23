@@ -1,0 +1,114 @@
+<div class="board">
+  <header class="header">
+    <h2>🧾 AJAX Demo: CRUD de Posts (JSONPlaceholder)</h2>
+  </header>
+
+  <div class="layout">
+    <!-- FORM -->
+    <section class="panel panel--form">
+      <h3>✏️ Formulario</h3>
+
+      <div class="form">
+        <label class="field">
+          <span class="label">UserId</span>
+          <input
+            type="text"
+            inputmode="numeric"
+            [value]="userId"
+            (input)="userId = +$any($event.target).value || 1"
+          />
+        </label>
+
+        <label class="field wide">
+          <span class="label">Título</span>
+          <input
+            type="text"
+            placeholder="Ej: Mi primer post"
+            [value]="title"
+            (input)="title = $any($event.target).value"
+          />
+        </label>
+
+        <label class="field wide">
+          <span class="label">Body</span>
+          <textarea
+            rows="5"
+            placeholder="Escribe el contenido..."
+            [value]="body"
+            (input)="body = $any($event.target).value"
+          ></textarea>
+        </label>
+      </div>
+
+      @if (error) {
+        <p class="error">⚠️ {{ error }}</p>
+      }
+
+      <div class="actions">
+        @if (modo === 'crear') {
+          <button type="button" class="btn btn--primary" (click)="crear()" [disabled]="saving">
+            @if (saving) { Guardando... } @else { Crear }
+          </button>
+        } @else {
+          <button type="button" class="btn btn--primary" (click)="guardarEdicion()" [disabled]="saving">
+            @if (saving) { Guardando... } @else { Guardar cambios }
+          </button>
+          <button type="button" class="btn btn--ghost" (click)="cancelarEdicion()" [disabled]="saving">
+            Cancelar
+          </button>
+        }
+      </div>
+    </section>
+
+    <!-- LIST -->
+    <section class="panel panel--list">
+      <div class="top">
+        <h3>📚 Posts</h3>
+        <button type="button" class="btn btn--ghost" (click)="cargar()" [disabled]="loading">
+          @if (loading) { Cargando... } @else { Recargar }
+        </button>
+      </div>
+
+      <div class="search">
+        <input
+          type="text"
+          placeholder="Buscar por id/título/body..."
+          [value]="q"
+          (input)="q = $any($event.target).value"
+        />
+        <span class="chip">{{ postsFiltrados.length }}</span>
+      </div>
+
+      @if (loading) {
+        <div class="empty">Cargando posts...</div>
+      } @else if (postsFiltrados.length === 0) {
+        <div class="empty">No hay resultados.</div>
+      } @else {
+        <ul class="list">
+          @for (p of postsFiltrados; track p.id) {
+            <li class="item">
+              <div class="head">
+                <div>
+                  <span class="id">#{{ p.id }}</span>
+                  <span class="uid">u{{ p.userId }}</span>
+                </div>
+
+                <div class="mini-actions">
+                  <button type="button" class="mini mini--edit" (click)="empezarEditar(p)">
+                    Editar
+                  </button>
+                  <button type="button" class="mini mini--del" (click)="eliminar(p)">
+                    Borrar
+                  </button>
+                </div>
+              </div>
+
+              <h4 class="title">{{ p.title }}</h4>
+              <p class="body">{{ p.body }}</p>
+            </li>
+          }
+        </ul>
+      }
+    </section>
+  </div>
+</div>

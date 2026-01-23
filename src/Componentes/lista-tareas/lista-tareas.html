@@ -1,0 +1,36 @@
+<section class="todo">
+  <header class="todo__header">
+    <h2>Lista de tareas</h2>
+  </header>
+
+  <div class="todo__form">
+    <input
+      class="todo__input"
+      [value]="texto"
+      (input)="texto = $any($event.target).value"
+      placeholder="Escribe una tarea..."
+    />
+    <button class="btn btn--primary" type="button" (click)="agregar()">
+      Agregar
+    </button>
+  </div>
+
+  @if (tareas.length === 0) {
+    <div class="empty">
+      <p><strong>No hay tareas todavía.</strong></p>
+      <p>Escribe una arriba y pulsa “Agregar”.</p>
+    </div>
+  } @else {
+    <ul class="todo__list">
+      @for (t of tareas; track t.id) {
+        <li class="todo__item">
+          <span class="todo__text">{{ t.texto }}</span>
+
+          <button class="btn btn--danger" type="button" (click)="eliminar(t.id)">
+            Eliminar
+          </button>
+        </li>
+      }
+    </ul>
+  }
+</section>

@@ -1,0 +1,78 @@
+$page-bg: #fff7ed;
+$page-border: #fed7aa;
+$page-accent-bg: #ffedd5;
+$page-accent-text: #9a3412;
+
+.page {
+  border-radius: 16px;
+  border: 2px dashed $page-border;
+  background: linear-gradient(180deg, #ffffff 0%, $page-bg 100%);
+  padding: 14px;
+}
+
+.page__badge {
+  display: inline-flex;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 1000;
+  font-size: 12px;
+
+  background: $page-accent-bg;
+  border: 2px solid $page-border;
+  color: $page-accent-text;
+}
+
+.page__title {
+  margin: 10px 0 6px;
+  font-size: 18px;
+  font-weight: 1000;
+  color: #111827;
+}
+
+.page__text {
+  margin: 0 0 12px;
+  color: #374151;
+  font-weight: 700;
+
+  code {
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    font-weight: 1000;
+    color: #111827;
+  }
+}
+
+.page__grid {
+  display: grid;
+  gap: 10px;
+
+  @media (min-width: 640px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.mini-card {
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 12px;
+}
+
+.mini-card__label {
+  display: block;
+  font-size: 12px;
+  font-weight: 1000;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.mini-card__value {
+  display: block;
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 1000;
+  color: #111827;
+}

@@ -1,0 +1,22 @@
+<section class="routes">
+  <header class="routes__header">
+    <h2>Ejemplos (rutas hijas)</h2>
+    <p class="routes__sub">
+      Navega entre rutas hijas con <code>routerLink</code> 
+      y mira cómo cambia el <code>router-outlet</code> 
+      Fíjate que en las páginas, aunque en el <code>path</code> solo está pag1, pag2 y pag3, la ruta se completa automaticamente con <code>ruta/pag1</code> porque está como children.
+    </p>
+  </header>
+
+  <nav class="routes__nav">
+    <a class="tab" routerLink="pag1" routerLinkActive="active">Página 1</a>
+    <a class="tab" routerLink="pag2" routerLinkActive="active">Página 2</a>
+    <a class="tab" routerLink="pag3" routerLinkActive="active">Página 3</a>
+  </nav>
+
+  <hr class="sep" />
+
+  <div class="routes__content">
+    <router-outlet />
+  </div>
+</section>

@@ -1,0 +1,28 @@
+<section class="paper">
+  <h2>🧩 Padre-Hijo: Modal de confirmación</h2>
+  <p class="subtitle">
+    El padre abre el modal y le pasa el mensaje. El hijo emite confirmar/cancelar.
+  </p>
+
+  <ul class="list">
+    @for (t of tareas; track t.id) {
+      <li class="item">
+        <span class="text">{{ t.titulo }}</span>
+        <button class="btn btn--danger" type="button" (click)="abrirModalBorrado(t)">
+          Eliminar
+        </button>
+      </li>
+    }
+  </ul>
+
+  <!-- HIJO reutilizable -->
+  <app-confirm-modal
+    [abierto]="modalAbierto"
+    titulo="Borrar tarea"
+    [mensaje]="'¿Seguro que quieres borrar: ' + (tareaPendienteDeBorrar?.titulo ?? '') + '?'"
+    textoConfirmar="Sí, borrar"
+    textoCancelar="Cancelar"
+    (confirmar)="confirmarBorrado()"
+    (cancelar)="cancelarBorrado()"
+  />
+</section>

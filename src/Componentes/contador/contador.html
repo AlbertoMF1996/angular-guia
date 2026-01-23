@@ -1,0 +1,17 @@
+<section class="counter">
+  <header class="counter__header">
+    <h2>Contador</h2>
+    <p class="counter__sub">Practica eventos y estado del componente.</p>
+  </header>
+
+  <div class="counter__value">
+    <span class="label">Valor</span>
+    <span class="num">{{ numero }}</span>
+  </div>
+
+  <div class="counter__actions">
+    <button class="btn btn--ghost" type="button" (click)="dec()">−</button>
+    <button class="btn btn--primary" type="button" (click)="inc()">+</button>
+    <button class="btn btn--danger" type="button" (click)="reset()">Reset</button>
+  </div>
+</section>

@@ -1,0 +1,87 @@
+<section class="demo">
+  <header class="demo__header">
+    <h2>Demo: &#64;if y &#64;for</h2>
+    <p class="demo__sub">Dos vistas para practicar render condicional y listas.</p>
+  </header>
+
+  <div class="tabs">
+    <button
+      type="button"
+      class="tab"
+      (click)="vista = 'vistaIf'"
+      [class.active]="vista === 'vistaIf'"
+    >
+      vistaIf
+    </button>
+
+    <button
+      type="button"
+      class="tab"
+      (click)="vista = 'vistaFor'"
+      [class.active]="vista === 'vistaFor'"
+    >
+      vistaFor
+    </button>
+  </div>
+
+  <hr class="sep" />
+
+  @if (vista === 'vistaIf') {
+    <section class="panel">
+      <h3 class="panel__title">Vista IF</h3>
+
+      <div class="row">
+        <button class="btn btn--primary" type="button" (click)="mostrar()">Mostrar</button>
+        <button class="btn btn--ghost" type="button" (click)="ocultar()">Ocultar</button>
+      </div>
+
+      @if (visible) {
+        <div class="box">
+          <p>
+            Este contenido se muestra/oculta con
+            <code>&#64;if</code>.
+          </p>
+        </div>
+      } @else {
+        <div class="box box--muted">
+          <p>Contenido oculto. Pulsa <strong>Mostrar</strong>.</p>
+        </div>
+      }
+    </section>
+  } @else {
+    <section class="panel">
+      <h3 class="panel__title">Vista FOR</h3>
+
+      <div class="row">
+        <input
+          class="input"
+          type="text"
+          inputmode="numeric"
+          placeholder="Introduce un entero (0-10)"
+          [value]="inputNumero"
+          (input)="inputNumero = $any($event.target).value"
+        />
+        <button class="btn btn--primary" type="button" (click)="generar()">Generar</button>
+      </div>
+
+      @if (error) {
+        <p class="error">⚠️ {{ error }}</p>
+      }
+
+      @if (!error && repeticiones.length > 0) {
+        <ul class="list">
+          @for (x of repeticiones; track x) {
+            <li class="item">
+              <span class="badge">{{ x }}</span>
+              repetición {{ x }}
+            </li>
+          }
+        </ul>
+      }
+
+      @if (!error && repeticiones.length === 0) {
+        <p class="hint">Introduce un número y pulsa “Generar”.</p>
+      }
+    </section>
+  }
+</section>

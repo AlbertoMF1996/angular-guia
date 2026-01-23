@@ -1,0 +1,68 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  z-index: 50;
+}
+
+.modal {
+  width: min(520px, 100%);
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  padding: 16px;
+}
+
+.title {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 900;
+  color: #111827;
+}
+
+.message {
+  margin: 0 0 14px;
+  color: #374151;
+  line-height: 1.35;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border: 0;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 80ms ease, opacity 120ms ease;
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &--ghost {
+    background: #f3f4f6;
+    color: #111827;
+    border: 1px solid #e5e7eb;
+    &:hover {
+      opacity: 0.95;
+    }
+  }
+
+  &--danger {
+    background: #ef4444;
+    color: #ffffff;
+    &:hover {
+      opacity: 0.95;
+    }
+  }
+}

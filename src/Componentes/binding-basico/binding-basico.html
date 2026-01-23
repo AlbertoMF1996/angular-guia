@@ -1,0 +1,31 @@
+<section class="binding">
+  <header class="binding__header">
+    <h2>Binding básico</h2>
+    <p class="binding__sub">Practica (input), interpolación y [disabled].</p>
+  </header>
+
+  <div class="binding__form">
+    <label class="field">
+      <span class="label">Nombre</span>
+      <input
+        class="input"
+        (input)="actualizarNombre($any($event.target).value)"
+        placeholder="Tu nombre..."
+      />
+    </label>
+
+    <div class="hello">
+      <span class="hello__chip">👋</span>
+      <p class="hello__text">Hola, <strong>{{ nombre || '...' }}</strong></p>
+    </div>
+
+    <button class="btn btn--primary" type="button" [disabled]="deshabilitado">
+      @if (deshabilitado) { Escribe tu nombre } @else { Continuar }
+    </button>
+
+    <p class="hint">
+      Estado del botón:
+      <strong>{{ deshabilitado ? 'Deshabilitado' : 'Habilitado' }}</strong>
+    </p>
+  </div>
+</section>
