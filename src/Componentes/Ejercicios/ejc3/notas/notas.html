@@ -1,0 +1,29 @@
+<h3>📝 Notas</h3>
+
+<div class="row">
+  <input
+    class="input"
+    [value]="texto"
+    (input)="texto = $any($event.target).value"
+    placeholder="Nota (máx 40)"
+  />
+  <button class="btn" type="button" (click)="agregar()">Añadir</button>
+</div>
+
+@if (error) { <p class="error">{{ error }}</p> }
+
+@if (data?.notas?.length === 0) {
+  <p class="hint">No hay notas todavía.</p>
+} @else {
+  <ul class="list">
+    @for (n of data.notas; track n.id) {
+      <li class="item">
+        <div>
+          <strong>{{ n.texto }}</strong>
+          <div class="muted">{{ n.fecha }}</div>
+        </div>
+        <button class="mini" type="button" (click)="eliminar(n.id)">X</button>
+      </li>
+    }
+  </ul>
+}

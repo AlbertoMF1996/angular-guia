@@ -1,0 +1,13 @@
+<h3>🎨 Ajustes</h3>
+
+<label class="field">
+  <span>Apodo</span>
+  <input class="input" [value]="data?.apodo" (input)="data.apodo = $any($event.target).value" />
+</label>
+
+<label class="field">
+  <span>Color</span>
+  <input type="color" [value]="data?.color" (input)="data.color = $any($event.target).value" />
+</label>
+
+<button class="btn" type="button" (click)="guardar()">Guardar</button>

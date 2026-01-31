@@ -1,0 +1,9 @@
+<h3>📌 Resumen</h3>
+
+@if (data) {
+  <div class="card" [style.borderColor]="data.color">
+    <p><strong>Apodo:</strong> {{ data.apodo || 'Sin apodo' }}</p>
+    <p><strong>Nº notas:</strong> {{ data.notas.length }}</p>
+    <p><strong>Última actualización:</strong> {{ data.updatedAt }}</p>
+  </div>
+}

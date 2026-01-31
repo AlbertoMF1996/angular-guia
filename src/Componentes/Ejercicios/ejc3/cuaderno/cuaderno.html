@@ -1,0 +1,21 @@
+<section class="book">
+  <header class="book__header">
+    <h2>📓 Cuaderno del alumno</h2>
+
+    @if (alumnoId$ | async; as alumnoId) {
+      <p class="sub">Alumno: <strong>#{{ alumnoId }}</strong></p>
+
+      <nav class="nav">
+        <a class="tab" [routerLink]="['/cuaderno', alumnoId, 'resumen']" routerLinkActive="active">Resumen</a>
+        <a class="tab" [routerLink]="['/cuaderno', alumnoId, 'notas']" routerLinkActive="active">Notas</a>
+        <a class="tab" [routerLink]="['/cuaderno', alumnoId, 'ajustes']" routerLinkActive="active">Ajustes</a>
+      </nav>
+    }
+  </header>
+
+  <hr class="sep" />
+
+  <div class="content">
+    <router-outlet />
+  </div>
+</section>

@@ -1,0 +1,76 @@
+<section class="panel">
+  <header class="panel__header">
+    <h2>📌 EJC1 · Panel de avisos</h2>
+    <button class="btn btn--ghost" type="button" (click)="togglePanel()">
+      @if (panelActivo) { Apagar panel } @else { Encender panel }
+    </button>
+  </header>
+
+  <hr class="sep" />
+
+  <!-- TODO:
+       - Si panelActivo => mostrar el formulario + lista
+       - Si NO => mostrar mensaje "Panel apagado"
+  -->
+  @if (!panelActivo) {
+    <div class="off">
+      <p><strong>Panel apagado.</strong> Pulsa “Encender panel” para verlo.</p>
+    </div>
+  } @else {
+    <div class="form">
+      <label class="field">
+        <span>Texto del aviso</span>
+        <input
+          class="input"
+          [value]="texto"
+          (input)="texto = $any($event.target).value"
+          placeholder="Ej: Examen el viernes"
+        />
+      </label>
+
+      <label class="field">
+        <span>Tipo</span>
+        <select
+          class="select"
+          [value]="tipo"
+          (change)="tipo = $any($event.target).value"
+        >
+          <option value="info">info</option>
+          <option value="warning">warning</option>
+          <option value="urgente">urgente</option>
+        </select>
+      </label>
+
+      <button class="btn btn--primary" type="button" (click)="agregarAviso()">
+        Añadir aviso
+      </button>
+    </div>
+
+    @if (error) {
+      <p class="error">⚠️ {{ error }}</p>
+    }
+
+    <!-- TODO:
+         - Si no hay avisos => mensaje "No hay avisos"
+         - Si hay => lista con @for, cada item con estilo según tipo
+    -->
+    @if (avisos.length === 0) {
+      <p class="hint">No hay avisos todavía.</p>
+    } @else {
+      <ul class="list">
+        @for (a of avisos; track a.id) {
+          <li class="item" [class.urgente]="a.tipo === 'urgente'" [class.warning]="a.tipo === 'warning'">
+            <div class="item__top">
+              <span class="tag">{{ a.tipo }}</span>
+              <button class="mini mini--del" type="button" (click)="eliminarAviso(a.id)">
+                Eliminar
+              </button>
+            </div>
+
+            <p class="text">{{ a.texto }}</p>
+          </li>
+        }
+      </ul>
+    }
+  }
+</section>

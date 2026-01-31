@@ -12,6 +12,9 @@ import { TareasLocalstorage } from '../Componentes/tareas-localstorage/tareas-lo
 import { TareasConModal } from '../Componentes/tareas-con-modal/tareas-con-modal';
 import { Pokedex } from '../Componentes/Pokedex/pokedex/pokedex';
 import { Ajax } from '../Componentes/ajax/ajax';
+import { Ejc1 } from '../Componentes/Ejercicios/ejc1/ejc1';
+import { Ejc2 } from '../Componentes/Ejercicios/ejc2/ejc2';
+import { Cuaderno } from '../Componentes/Ejercicios/ejc3/cuaderno/cuaderno';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'renderizadoCondicional', pathMatch: 'full' },
@@ -24,7 +27,7 @@ export const routes: Routes = [
   { path: 'comunicacionEntreComponentes', component: TareasConModal },
   { path: 'ajax', component: Ajax },
   { path: 'preguntas', component: PosiblesPreguntas },
-
+  
   {
     path: 'rutas',
     component: Rutas,
@@ -35,6 +38,11 @@ export const routes: Routes = [
       { path: 'pag3', component: Pag3 },
     ],
   },
+  { path: 'ejc1', component: Ejc1 },
+  { path: 'ejc2', component: Ejc2 },
+  { path: 'ejc3', component: Cuaderno },
+
+
 
   { path: '**', redirectTo: 'renderizadoCondicional' },
 ];

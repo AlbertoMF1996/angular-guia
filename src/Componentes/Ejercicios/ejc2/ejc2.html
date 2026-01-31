@@ -1,0 +1,58 @@
+<section class="ajax">
+  <header class="ajax__header">
+    <h2>🌐 EJC2 · AJAX con fetch</h2>
+    <p class="ajax__sub">Busca un post por ID usando fetch (sin HttpClient).</p>
+  </header>
+
+  <div class="controls">
+    <label class="field">
+      <span>ID (1-100)</span>
+      <input
+        class="input"
+        type="text"
+        inputmode="numeric"
+        [value]="inputId"
+        (input)="inputId = $any($event.target).value"
+      />
+    </label>
+
+    <div class="buttons">
+      <button class="btn btn--primary" type="button" (click)="buscar()" [disabled]="loading">
+        @if (loading) { Cargando... } @else { Buscar }
+      </button>
+
+      <button class="btn btn--ghost" type="button" (click)="random()" [disabled]="loading">
+        Random
+      </button>
+    </div>
+  </div>
+
+  @if (error) {
+    <p class="error">⚠️ {{ error }}</p>
+  }
+
+  @if (loading) {
+    <div class="loadingBox">
+      <div class="dots">
+        <span></span><span></span><span></span>
+      </div>
+      <p>Cargando post...</p>
+    </div>
+  }
+
+  @if (!loading && !error && post) {
+    <article class="card">
+      <div class="meta">
+        <span class="chip">#{{ post.id }}</span>
+        <span class="chip chip--soft">u{{ post.userId }}</span>
+      </div>
+
+      <h3 class="title">{{ post.title }}</h3>
+      <p class="body">{{ post.body }}</p>
+    </article>
+  }
+
+  @if (!loading && !error && !post) {
+    <p class="hint">Introduce un ID y pulsa “Buscar”.</p>
+  }
+</section>
